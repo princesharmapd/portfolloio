@@ -2,6 +2,8 @@
   "name": "gitdeploy",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://princesharmapd.github.io/portfolloio",
+
   "dependencies": {
     "cra-template": "1.2.0",
     "react": "^19.0.0",
