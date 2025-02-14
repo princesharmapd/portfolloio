@@ -1,0 +1,15 @@
+<svg
+  width="1298"
+  height="1298"
+  viewBox="0 0 1298 1298"
+  fill="none"
+  xmlns="http://www.w3.org/2000/svg"
+>
+  <filter id="drop-shadow" x="-50%" y="-50%" width="200%" height="200%">
+    <feOffset in="SourceAlpha" dx="10" dy="10" result="offsetOut"/>
+    <feGaussianBlur in="offsetOut" stdDeviation="10" result="blurOut" />
+    <feBlend in="SourceGraphic" in2="blurOut" mode="normal" />
+  </filter>
+
+  <circle cx="649" cy="649" r="649" fill="black" />
+</svg>
