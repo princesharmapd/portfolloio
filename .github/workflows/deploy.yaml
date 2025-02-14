@@ -28,7 +28,7 @@ jobs:
         run: npm run build
         env:
           CI: false
-          PUBLIC_URL: /your-repo-name  # Replace with your repository name if needed
+          PUBLIC_URL: /portfolloio  # Replace with your repository name if needed
 
       - name: Deploy to GitHub Pages
         uses: JamesIves/github-pages-deploy-action@v4
