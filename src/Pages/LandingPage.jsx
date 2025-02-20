@@ -1,46 +1,46 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./LandingPage.css";
-import firstimage from "../assets/tileimages/firstimage.jpg";
-import secondimage from "../assets/tileimages/secondimage.jpg";
-import thirdimage from "../assets/tileimages/thirdimage.jpg";
-import fourthimage from "../assets/tileimages/fourthimage.jpg";
+import firstimage from "../assets/tileimages/firstimage.png";
+import secondimage from "../assets/tileimages/secondimage.png";
+import thirdimage from "../assets/tileimages/thirdimage.png";
+import fourthimage from "../assets/tileimages/fourthimage.png";
+import fifthimage from "../assets/tileimages/fifthimage.png";
 
 const initialTiles = [
-  { id: 1, title: "CSG Dashboard", image: firstimage, route: "/dashboard" },
-  { id: 2, title: "ISG Dashboard", image: secondimage, route: "/isg-dashboard" },
-  { id: 3, title: "Third Dashboard", image: thirdimage, route: "/partner-dashboard" },
-  { id: 4, title: "Fourth Dashboard", image: fourthimage, route: "/ppm-dashboard" },
+  { id: 1, title: "Market Overview", image: firstimage, route: "/executive" },
+  { id: 2, title: "Stock Data", image: secondimage, route: "/data" },
+  { id: 3, title: "Indices Performance", image: thirdimage, route: "/dashboard" },
+  { id: 4, title: "Derivatives Analysis", image: fourthimage, route: "/dashboard" },
+  { id: 5, title: "Trading Insights", image: fifthimage, route: "/dashboard" },
 ];
+
+const userAllowedIds = [1, 2, 3, 4, 5];
 
 const LandingPage = () => {
   const navigate = useNavigate();
-  const [tiles, setTiles] = useState([]);
-
-  useEffect(() => {
-    // Check if images are already stored in localStorage
-    const storedTiles = localStorage.getItem("tilesData");
-
-    if (storedTiles) {
-      setTiles(JSON.parse(storedTiles));
-    } else {
-      setTiles(initialTiles);
-      localStorage.setItem("tilesData", JSON.stringify(initialTiles));
-    }
-  }, []);
-
-  if (tiles.length === 0) return null; // Prevents re-rendering on refresh
+  const [tiles, setTiles] = useState(initialTiles);
 
   return (
     <div className="landing-container">
-      <h2>Market Dashboards</h2>
+      <h2>NSE Dashboards</h2>
       <div className="tiles">
-        {tiles.map((tile) => (
-          <div key={tile.id} className="tile" onClick={() => navigate(tile.route)}>
-            <img src={tile.image} alt={tile.title} className="tile-image" />
-            <div className="tile-title">{tile.title}</div>
-          </div>
-        ))}
+        {tiles.map((tile, index) => {
+          const isDisabled = !userAllowedIds.includes(tile.id);
+          return (
+            <div
+              key={tile.id}
+              className={`tile ${isDisabled ? "disabled" : ""}`}
+              onClick={() => !isDisabled && navigate(tile.route)}
+              style={{ "--delay": `${index * 0.2}s` }} // Staggered flip effect
+            >
+              <div className="tile-image-container">
+                <img src={tile.image} alt={tile.title} className="tile-image" />
+              </div>
+              <div className="tile-title">{tile.title}</div>
+            </div>
+          );
+        })}
       </div>
     </div>
   );

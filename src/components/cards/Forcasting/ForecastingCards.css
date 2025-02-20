@@ -1,0 +1,76 @@
+/* Dialog Styles */
+.dialog-title {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #343a40;
+  text-align: left;
+}
+
+.table-container {
+  margin-top: 10px;
+}
+
+.table-header {
+  background-color: #007bff;
+  color: white;
+}
+
+.table-header th {
+  color: white !important;
+  font-weight: bold;
+}
+
+.table-row:nth-child(even) {
+  background-color: #f8f9fa;
+}
+
+.table-row:nth-child(odd) {
+  background-color: white;
+}
+
+/* Buttons */
+.button-container {
+  display: flex;
+  justify-content: space-between;
+  padding: 15px;
+}
+
+.gray-button {
+  background-color: #6c757d !important;
+  color: white !important;
+}
+
+/* Clickable Peak Volume */
+.peak-volume {
+  color: #007bff;
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+/* Card Styling */
+.card {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  background-color: #f8f9fa;
+  height: 90%;
+}
+
+.card-content {
+  padding: 10px;
+  flex: 1;
+}
+
+.card-title {
+  font-size: 0.7rem;
+  font-weight: bold;
+  color: #343a40;
+}
+
+.card-body {
+  font-size: 0.7rem;
+  color: #212529;
+}

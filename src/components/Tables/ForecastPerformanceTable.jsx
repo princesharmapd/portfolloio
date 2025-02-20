@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import {
   Table,
   TableBody,
@@ -9,80 +9,124 @@ import {
   Paper,
   Typography,
   Box,
+  IconButton,
+  Chip,
+  FormControl,
+  InputLabel,
+  Select,
+  MenuItem,
+  Grid,
+  Button,
+  TextField,
+  TablePagination,
+  TableSortLabel
 } from '@mui/material';
-import axios from 'axios';
+import ArrowDropUpIcon from '@mui/icons-material/ArrowDropUp';
+import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
+import FilterListIcon from '@mui/icons-material/FilterList';
+import BusinessIcon from '@mui/icons-material/Business';
 
-const endpoints = [
-  { name: 'Market Status', url: '/api/marketStatus' },
-  { name: '52 Week HL Summary', url: '/api/live-analysis-52Week-hlsummary' },
-  { name: '52 Week Low', url: '/api/live-analysis-52Week?index=low' },
-  { name: 'Online 52 Week High', url: '/api/online52NewHigh' },
-  { name: 'Most Active Monthly', url: '/api/mostActiveMonthly' },
-  { name: 'Price Band Hitters', url: '/api/live-analysis-price-band-hitter' },
-  { name: 'Market Snapshot', url: '/api/snapshot-capital-market-ews' },
-  { name: 'Circulars', url: '/api/circulars' },
-  { name: 'Latest Circulars', url: '/api/latest-circular' },
+const rows = [
+  { queue: 1, forecast: 100, accuracyLastWeek: '1%', trends: '+5%', rootCause: 'Service Launch', rcaStatus: 'Confirmed', recommendation: 'Connect with business leader for new services', actionOwner: 'Business Leader' },
+  { queue: 2, forecast: 200, accuracyLastWeek: '-2%', trends: '+3%', rootCause: 'Unexpected Holiday', rcaStatus: 'In progress', recommendation: 'Arrange for work from home option. Change SLA', actionOwner: 'Forecast Team' },
+  { queue: 3, forecast: 250, accuracyLastWeek: '-15%', trends: '+12%', rootCause: 'Algorithm Update', rcaStatus: 'Confirmed', recommendation: 'Factor considered, Data repository build in progress', actionOwner: 'Data Team' },
+  { queue: 4, forecast: 150, accuracyLastWeek: '-18%', trends: '+8%', rootCause: 'CTE Unavailable', rcaStatus: 'Confirmed', recommendation: 'WFM to hire technical engineers to meet high call vol.', actionOwner: 'WFM Team' },
+  { queue: 5, forecast: 450, accuracyLastWeek: '5%', trends: '+14%', rootCause: 'New Product Launch', rcaStatus: 'In progress', recommendation: 'Change SLA, Update Website and answering machine', actionOwner: 'Comms. Team' },
 ];
 
-const MultiApiTables = () => {
-  const [data, setData] = useState({});
+const ForecastPerformanceTable = () => {
+  const [selectedQueue, setSelectedQueue] = useState('');
+  const [data, setData] = useState(rows);
+  const [page, setPage] = useState(0);
+  const [rowsPerPage, setRowsPerPage] = useState(5);
+  const [order, setOrder] = useState('asc');
+  const [orderBy, setOrderBy] = useState('queue');
 
-  useEffect(() => {
-    const fetchData = async () => {
-      const results = {};
-      for (let endpoint of endpoints) {
-        try {
-          const response = await axios.get(endpoint.url);
-          results[endpoint.name] = response.data;
-        } catch (error) {
-          results[endpoint.name] = { error: 'Failed to fetch data' };
-        }
-      }
-      setData(results);
-    };
-    fetchData();
-  }, []);
+  const handleQueueChange = (event) => {
+    setSelectedQueue(event.target.value);
+  };
+
+  const handleSort = (property) => {
+    const isAsc = orderBy === property && order === 'asc';
+    setOrder(isAsc ? 'desc' : 'asc');
+    setOrderBy(property);
+    setData([...data].sort((a, b) => (isAsc ? (a[property] > b[property] ? 1 : -1) : (a[property] < b[property] ? 1 : -1))));
+  };
 
   return (
     <Box style={{ width: '98%', fontSize: '12px' }}>
-      {endpoints.map((endpoint) => (
-        <Paper key={endpoint.name} style={{ width: '100%', overflow: 'auto', padding: 12, marginBottom: 20 }}>
-          <Typography variant="h6" style={{ fontWeight: 'bold', fontSize: '14px', marginBottom: '8px' }}>
-            {endpoint.name}
+      <Paper style={{ width: '100%', overflow: 'auto', padding: 12 }}>
+        <Grid container alignItems="center">
+          <Typography variant="h6" style={{ fontWeight: 'bold', fontSize: '14px', marginRight: '8px' }}>
+            Forecast Performance
           </Typography>
-          <TableContainer>
-            <Table>
-              <TableHead>
-                <TableRow>
-                  {data[endpoint.name] && data[endpoint.name][0] &&
-                    Object.keys(data[endpoint.name][0]).map((key) => (
-                      <TableCell key={key} style={{ fontWeight: 'bold', fontSize: '12px' }}>{key}</TableCell>
-                    ))}
+          <Box style={{ backgroundColor: '#f0f0f0', padding: '4px 8px', borderRadius: '4px' }}>
+            <Typography variant="body2" style={{ fontSize: '12px' }}>
+              Average Forecast Accuracy 96%
+            </Typography>
+          </Box>
+        </Grid>
+
+        <Box display="flex" justifyContent="flex-end" style={{ marginTop: -30 }}>
+          <FormControl style={{ minWidth: 180 }} size="small">
+            <InputLabel style={{ fontSize: '12px' }}>Select Queue</InputLabel>
+            <Select value={selectedQueue} onChange={handleQueueChange} label="Select Queue">
+              {rows.map((row) => (
+                <MenuItem key={row.queue} value={row.queue} style={{ fontSize: '12px' }}>Queue {row.queue}</MenuItem>
+              ))}
+            </Select>
+          </FormControl>
+          <Button variant="outlined" style={{ marginLeft: 12, fontSize: '12px' }}>View Details</Button>
+        </Box>
+
+        <TableContainer style={{ marginTop: 12 }}>
+          <Table stickyHeader>
+            <TableHead>
+              <TableRow style={{ backgroundColor: '#007AD9' }}>
+                {['Queue', 'Forecast', 'Accuracy last week', 'Trends', 'Root cause', 'Rca status', 'Recommendation', 'Action owner'].map((headCell) => (
+                  <TableCell key={headCell} style={{ backgroundColor: '#007AD9', color: 'white', fontWeight: 'bold', textAlign: 'center', padding: 8, fontSize: '12px' }}>
+                    <TableSortLabel active={orderBy === headCell.toLowerCase().replace(/ /g, '')} direction={orderBy === headCell.toLowerCase().replace(/ /g, '') ? order : 'asc'} onClick={() => handleSort(headCell.toLowerCase().replace(/ /g, ''))}>
+                      {headCell}
+                    </TableSortLabel>
+                  </TableCell>
+                ))}
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {data.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row) => (
+                <TableRow key={row.queue}>
+                  <TableCell align="center" style={{ fontSize: '12px' }}>{row.queue}</TableCell>
+                  <TableCell align="center" style={{ fontSize: '12px' }}>{row.forecast}</TableCell>
+                  <TableCell align="center" style={{ fontSize: '12px' }}>{row.accuracyLastWeek}</TableCell>
+                  <TableCell align="center" style={{ fontSize: '12px', color: row.trends.startsWith('+') ? 'green' : 'red' }}>
+                    {row.trends} {row.trends.startsWith('+') ? <ArrowDropUpIcon fontSize="small" /> : <ArrowDropDownIcon fontSize="small" />}
+                  </TableCell>
+                  <TableCell align="center"><TextField value={row.rootCause} variant="outlined"
+                    size="small"
+                    fullWidth
+                    InputProps={{ style: { fontSize: '12px', height: '30px' } }}
+                    InputLabelProps={{ style: { fontSize: '10px' } }} /></TableCell>
+                  <TableCell align="center"><Chip label={row.rcaStatus} style={{ backgroundColor: row.rcaStatus === 'Confirmed' ? '#e6ffe6' : '#fff5e6', color: row.rcaStatus === 'Confirmed' ? 'green' : 'orange', fontSize: '10px' }} size="small" /></TableCell>
+                  <TableCell align="center" style={{ fontSize: '12px' }}>{row.recommendation}</TableCell>
+                  <TableCell align="center" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                    <TextField
+                      value={row.actionOwner}
+                      variant="outlined"
+                      size="small"
+                      fullWidth
+                      InputProps={{ style: { fontSize: '12px', height: '30px' } }}
+                      InputLabelProps={{ style: { fontSize: '10px' } }}
+                    />
+                    <BusinessIcon style={{ marginLeft: 8, fontSize: '16px' }} />
+                  </TableCell>
                 </TableRow>
-              </TableHead>
-              <TableBody>
-                {data[endpoint.name] && Array.isArray(data[endpoint.name]) ? (
-                  data[endpoint.name].map((row, index) => (
-                    <TableRow key={index}>
-                      {Object.values(row).map((value, i) => (
-                        <TableCell key={i} style={{ fontSize: '12px' }}>{JSON.stringify(value)}</TableCell>
-                      ))}
-                    </TableRow>
-                  ))
-                ) : (
-                  <TableRow>
-                    <TableCell colSpan={10} style={{ fontSize: '12px', color: 'red' }}>
-                      {data[endpoint.name]?.error || 'No data available'}
-                    </TableCell>
-                  </TableRow>
-                )}
-              </TableBody>
-            </Table>
-          </TableContainer>
-        </Paper>
-      ))}
+              ))}
+            </TableBody>
+          </Table>
+        </TableContainer>
+      </Paper>
     </Box>
   );
 };
 
-export default MultiApiTables;
+export default ForecastPerformanceTable;

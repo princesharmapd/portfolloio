@@ -1,4 +1,3 @@
-// TabBar.js
 import React from 'react';
 import PropTypes from 'prop-types';
 import Tabs from '@mui/material/Tabs';
@@ -23,12 +22,14 @@ export default function TabBar({ value, setValue }) {
         aria-label="basic tabs example"
         sx={{ minHeight: '28px', marginTop: '0px', marginLeft: '10px' }}
         TabIndicatorProps={{
-          sx: { top: '38px' }  // Adjust this value to control the distance between the tabs and the indicator
+          sx: { top: '38px' }  
         }}
       >
-        <Tab label="Executive" {...a11yProps(0)} sx={{ textTransform: 'capitalize', fontSize: '0.875rem', fontWeight: 500, minHeight: '28px' }} />
-        <Tab label="First Dashboard" {...a11yProps(1)} sx={{ textTransform: 'capitalize', fontSize: '0.875rem', fontWeight: 500, minHeight: '28px' }} />
-        <Tab label="Analytics" {...a11yProps(2)} sx={{ textTransform: 'capitalize', fontSize: '0.875rem', fontWeight: 500, minHeight: '28px' }} />
+        <Tab label="Forecasting" {...a11yProps(0)} sx={{ textTransform: 'capitalize', fontSize: '0.875rem', fontWeight: 500, minHeight: '28px' }} />
+        <Tab label="Planning" {...a11yProps(1)} sx={{ textTransform: 'capitalize', fontSize: '0.875rem', fontWeight: 500, minHeight: '28px' }} />
+        <Tab label="Scheduling" {...a11yProps(2)} sx={{ textTransform: 'capitalize', fontSize: '0.875rem', fontWeight: 500, minHeight: '28px' }} />
+        <Tab label="RTA" {...a11yProps(3)} sx={{ textTransform: 'capitalize', fontSize: '0.875rem', fontWeight: 500, minHeight: '28px' }} />
+      
       </Tabs>
     </Box>
   );

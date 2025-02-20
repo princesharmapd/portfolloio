@@ -57,7 +57,7 @@ const ForcastingFirstTable = () => {
 
   const handleChangeRowsPerPage = (event) => {
     setRowsPerPage(+event.target.value);
-    setPage(0); // Reset to the first page when the number of rows per page changes
+    setPage(0); 
   };
 
   const getPaginatedData = (data) => {
@@ -66,15 +66,12 @@ const ForcastingFirstTable = () => {
 
   return (
     <div>
-      {/* Grid container to arrange tables side by side */}
       <Grid container spacing={1}>
-        {/* First Table - Forecast Comparison */}
         <Grid item xs={12} md={6}>
           <Card>
             <CardContent>
-              {/* Table Header with Dropdown and View Details button */}
               <Box display="flex" justifyContent="space-between" alignItems="center" marginTop="-15px" marginBottom="10px" >
-                <h3 style={{fontSize:"18px"}}>Weekly Forecast Comparison</h3>
+                <h3 style={{ fontSize: "18px" }}>Weekly Forecast Comparison</h3>
                 <Box display="flex" alignItems="center">
                   <FormControl >
                     <InputLabel>Queue</InputLabel>
@@ -82,9 +79,9 @@ const ForcastingFirstTable = () => {
                       value={selectedQueue}
                       onChange={handleDropdownChange}
                       sx={{
-                        height: '30px', // Smaller height
-                        width: '130px', // Increased width
-                        padding: '0px 10px', // Adjust padding for a better fit
+                        height: '30px', 
+                        width: '130px', 
+                        padding: '0px 10px', 
                       }}
                     >
                       {forecastData.map((row) => (
@@ -92,13 +89,11 @@ const ForcastingFirstTable = () => {
                       ))}
                     </Select>
                   </FormControl>
-                  <Button onClick={() => handleViewDetails(forecastData.find((row) => row.queue === selectedQueue))} style={{fontSize:"12px"}}>
+                  <Button onClick={() => handleViewDetails(forecastData.find((row) => row.queue === selectedQueue))} style={{ fontSize: "12px" }}>
                     View Details
                   </Button>
                 </Box>
               </Box>
-
-              {/* First Table */}
               <TableContainer component={Paper} sx={{ margin: 0, padding: 0 }}>
                 <Table>
                   <TableHead>
@@ -119,13 +114,13 @@ const ForcastingFirstTable = () => {
                         <TableCell sx={{ fontSize: "11px", padding: "2px 4px" }}>{row.newForecast}</TableCell>
                         <TableCell sx={{ fontSize: "11px", padding: "2px 4px" }}>{row.change}</TableCell>
                         <TableCell sx={{ fontSize: "11px", padding: "2px 4px" }}>{row.reason}</TableCell>
-                        <TableCell sx={{ fontSize: "11px",padding: "2px 4px" }}>
-                        <span 
-              onClick={() => handleViewDetails(row)} 
-              style={{ fontSize: "11px", color: "#007AD9", cursor: "pointer", textDecoration: "underline" }}
-            >
-              Share
-            </span>
+                        <TableCell sx={{ fontSize: "11px", padding: "2px 4px" }}>
+                          <span
+                            onClick={() => handleViewDetails(row)}
+                            style={{ fontSize: "11px", color: "#007AD9", cursor: "pointer", textDecoration: "underline" }}
+                          >
+                            Share
+                          </span>
                         </TableCell>
                       </TableRow>
                     ))}
@@ -144,14 +139,11 @@ const ForcastingFirstTable = () => {
             </CardContent>
           </Card>
         </Grid>
-
-        {/* Second Table - Impacting Factors */}
         <Grid item xs={12} md={6}>
           <Card>
             <CardContent>
-              {/* Table Header with Dropdown and View Details button */}
               <Box display="flex" justifyContent="space-between" alignItems="center" marginTop="-15px" marginBottom="10px" >
-                <h3 style={{fontSize:"18px"}}>Impacting Factors</h3>
+                <h3 style={{ fontSize: "18px" }}>Impacting Factors</h3>
                 <Box display="flex" alignItems="center">
                   <FormControl >
                     <InputLabel>Queue</InputLabel>
@@ -159,9 +151,9 @@ const ForcastingFirstTable = () => {
                       value={selectedQueue}
                       onChange={handleDropdownChange}
                       sx={{
-                        height: '30px', // Smaller height
-                        width: '130px', // Increased width
-                        padding: '0px 10px', // Adjust padding for a better fit
+                        height: '30px',
+                        width: '130px',
+                        padding: '0px 10px',
                       }}
                     >
                       {forecastData.map((row) => (
@@ -169,51 +161,49 @@ const ForcastingFirstTable = () => {
                       ))}
                     </Select>
                   </FormControl>
-                  <Button onClick={() => handleViewDetails(forecastData.find((row) => row.queue === selectedQueue))} style={{fontSize:"12px"}}>
+                  <Button onClick={() => handleViewDetails(forecastData.find((row) => row.queue === selectedQueue))} style={{ fontSize: "12px" }}>
                     View Details
                   </Button>
                 </Box>
               </Box>
-
-              {/* Second Table */}
               <TableContainer component={Paper} sx={{ margin: 0, padding: 0 }}>
-              <Table sx={{ borderCollapse: "collapse" }}>
-    <TableHead>
-      <TableRow sx={{ height: "20px" }}>
-        <TableCell sx={{ backgroundColor: '#007AD9', color: 'white', fontSize: "11px", padding: "2px 4px" }}>Factor</TableCell>
-        <TableCell sx={{ backgroundColor: '#007AD9', color: 'white', fontSize: "11px", padding: "2px 4px" }}>Queues Impacted</TableCell>
-        <TableCell sx={{ backgroundColor: '#007AD9', color: 'white', fontSize: "11px", padding: "2px 4px" }}>Quantifiable Impact</TableCell>
-        <TableCell sx={{ backgroundColor: '#007AD9', color: 'white', fontSize: "11px", padding: "2px 4px" }}>Queue-level Details</TableCell>
-        <TableCell sx={{ backgroundColor: '#007AD9', color: 'white', fontSize: "11px", padding: "2px 4px" }}>Actions</TableCell>
-      </TableRow>
-    </TableHead>
-    <TableBody>
-      {getPaginatedData(forecastData).map((row) => (
-        <TableRow key={row.queue} sx={{ height: "20px" }}>
-          <TableCell sx={{ fontSize: "11px", padding: "2px 4px" }}>{row.factor}</TableCell>
-          <TableCell sx={{ fontSize: "11px", padding: "2px 4px" }}>{row.impactedQueues}</TableCell>
-          <TableCell sx={{ fontSize: "11px", padding: "2px 4px" }}>{row.quantifiableImpact}</TableCell>
-          <TableCell sx={{ padding: "2px 4px" }}>
-            <span 
-              onClick={() => handleViewDetails(row)} 
-              style={{ fontSize: "11px", color: "#007AD9", cursor: "pointer", textDecoration: "underline" }}
-            >
-              Check details
-            </span>
-          </TableCell>
-          <TableCell sx={{ padding: "2px 4px" }}>
-            <span style={{ fontSize: "11px", color: "#007AD9", cursor: "pointer", textDecoration: "underline" }}>
-              Approval
-            </span> 
-            {" | "}
-            <span style={{ fontSize: "11px", color: "#007AD9", cursor: "pointer", textDecoration: "underline" }}>
-              Feedback
-            </span>
-          </TableCell>
-        </TableRow>
-      ))}
-    </TableBody>
-  </Table>
+                <Table sx={{ borderCollapse: "collapse" }}>
+                  <TableHead>
+                    <TableRow sx={{ height: "20px" }}>
+                      <TableCell sx={{ backgroundColor: '#007AD9', color: 'white', fontSize: "11px", padding: "2px 4px" }}>Factor</TableCell>
+                      <TableCell sx={{ backgroundColor: '#007AD9', color: 'white', fontSize: "11px", padding: "2px 4px" }}>Queues Impacted</TableCell>
+                      <TableCell sx={{ backgroundColor: '#007AD9', color: 'white', fontSize: "11px", padding: "2px 4px" }}>Quantifiable Impact</TableCell>
+                      <TableCell sx={{ backgroundColor: '#007AD9', color: 'white', fontSize: "11px", padding: "2px 4px" }}>Queue-level Details</TableCell>
+                      <TableCell sx={{ backgroundColor: '#007AD9', color: 'white', fontSize: "11px", padding: "2px 4px" }}>Actions</TableCell>
+                    </TableRow>
+                  </TableHead>
+                  <TableBody>
+                    {getPaginatedData(forecastData).map((row) => (
+                      <TableRow key={row.queue} sx={{ height: "45px" }}>
+                        <TableCell sx={{ fontSize: "11px", padding: "2px 4px" }}>{row.factor}</TableCell>
+                        <TableCell sx={{ fontSize: "11px", padding: "2px 4px" }}>{row.impactedQueues}</TableCell>
+                        <TableCell sx={{ fontSize: "11px", padding: "2px 4px" }}>{row.quantifiableImpact}</TableCell>
+                        <TableCell sx={{ padding: "2px 4px" }}>
+                          <span
+                            onClick={() => handleViewDetails(row)}
+                            style={{ fontSize: "11px", color: "#007AD9", cursor: "pointer", textDecoration: "underline" }}
+                          >
+                            Check details
+                          </span>
+                        </TableCell>
+                        <TableCell sx={{ padding: "2px 4px" }}>
+                          <span style={{ fontSize: "11px", color: "#007AD9", cursor: "pointer", textDecoration: "underline" }}>
+                            Approval
+                          </span>
+                          {" | "}
+                          <span style={{ fontSize: "11px", color: "#007AD9", cursor: "pointer", textDecoration: "underline" }}>
+                            Feedback
+                          </span>
+                        </TableCell>
+                      </TableRow>
+                    ))}
+                  </TableBody>
+                </Table>
                 <TablePagination
                   rowsPerPageOptions={[5, 10, 25]}
                   component="div"
@@ -228,8 +218,6 @@ const ForcastingFirstTable = () => {
           </Card>
         </Grid>
       </Grid>
-
-      {/* Dialog Box */}
       <Dialog open={dialogOpen} onClose={handleCloseDialog}>
         <DialogTitle>{dialogData?.reason || 'Details'}</DialogTitle>
         <DialogContent>
@@ -238,7 +226,6 @@ const ForcastingFirstTable = () => {
               <p><strong>Factor:</strong> {dialogData.factor}</p>
               <p><strong>Impacted Queues:</strong> {dialogData.impactedQueues}</p>
               <p><strong>Quantifiable Impact:</strong> {dialogData.quantifiableImpact}</p>
-              {/* Add more details as needed */}
             </div>
           )}
         </DialogContent>

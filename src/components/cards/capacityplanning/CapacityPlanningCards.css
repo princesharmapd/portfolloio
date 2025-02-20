@@ -1,0 +1,101 @@
+.metric-card, .sla-card {
+  background: #fff;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  padding: 15px;
+  height: auto;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  height: 80%;
+}
+
+.card-title, .sla-title {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #2d3748;
+  margin-bottom: 8px;
+  padding-bottom: 6px;
+  text-align: center;
+  margin-top:-5px
+}
+
+.card-title.no-border {
+  border-bottom: none;
+}
+
+.sla-title {
+  border-bottom: 2px solid #e2e8f0;
+}
+
+.card-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+.value-container {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.main-value {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #1a365d;
+}
+
+.delta-value {
+  font-size: 0.85rem;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.positive {
+  color: #38a169;
+}
+
+.arrow {
+  font-size: 1rem;
+}
+
+/* SLA Specific Styles */
+.sla-table {
+  display: table;
+  width: 100%;
+  border-collapse: collapse;
+  text-align: center;
+ 
+  
+}
+
+.sla-row {
+  display: table-row;
+}
+
+.sla-cell {
+  display: table-cell;
+  padding: 8px;
+  border: 1px solid #e2e8f0;
+  vertical-align: middle;
+  color: #4a5568;
+  height: 50%;
+}
+
+.sla-header .sla-cell {
+  font-weight: 500;
+  background-color: #f7fafc;
+  color: #718096;
+  font-size: 12px;
+}
+
+.bold {
+  font-weight: 700;
+  color: #1a202c;
+  font-size: 12px;
+}
+
+.sla-row:last-child .sla-cell {
+  border-bottom: none;
+}
