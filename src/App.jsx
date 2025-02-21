@@ -17,7 +17,7 @@ const App = () => {
         <div style={{ display: "flex", flexDirection: "column"}}>
           <Topbar />
           <Routes>
-            <Route path="/" element={<LandingPage />} />
+            <Route path="portfolloio//" element={<LandingPage />} />
             {/* <Route path="/auth/callback" element={<Callback />} /> */}
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/executive" element={<MarketOverview />} />

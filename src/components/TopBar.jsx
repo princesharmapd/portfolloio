@@ -20,7 +20,7 @@ export default function TopBar() {
       <Toolbar sx={{ display: 'flex', alignItems: 'center', height: '100%', marginTop: "-5px" }}>
         <div style={{ display: 'flex', alignItems: 'center' }}>
           {/* Wrap in Link to navigate to "/" */}
-          <Link to="/" style={{ display: 'flex', alignItems: 'center', textDecoration: 'none', color: 'inherit' }}>
+          <Link to="portfolloio//" style={{ display: 'flex', alignItems: 'center', textDecoration: 'none', color: 'inherit' }}>
             <img alt="logo" src={logo} height="20" style={{ marginRight: '5px' }} />
             <Typography sx={{ fontSize: '1rem', color: '#fff', fontWeight: 'bold' }}>
               NSE Data Analysis
