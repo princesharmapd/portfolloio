@@ -118,6 +118,7 @@ const HeroSection = () => {
         overflow: 'hidden',
         gap: { xs: 4, md: 8 }, // Add gap between photo and text
         px: { xs: 2, md: 4 }, // Add padding on the sides
+        pt: { xs: '20px', md: 0 }, // Add 20px padding top for mobile
       }}
     >
       {/* Animated Background */}
