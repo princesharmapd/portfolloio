@@ -5,7 +5,60 @@ import { useEffect } from 'react';
 import { useInView } from 'react-intersection-observer';
 
 // Replace with your photo
-import myPhoto from './assets/react.svg'; // Adjust the path to your photo
+import myPhoto from './assets/profile.jpg'; // Adjust the path to your photo
+
+// Import skill icons
+import JavaScriptIcon from './assets/skills/javascript-logo.svg';
+import ReactIcon from './assets/skills/react-logo.svg';
+import AngularIcon from './assets/skills/angular-logo.svg';
+import VueIcon from './assets/skills/vue.js-logo.svg';
+import NodeIcon from './assets/skills/node.js-logo.svg';
+import PythonIcon from './assets/skills/python-logo.svg';
+import MongoDBIcon from './assets/skills/mongodb-logo.svg';
+import HTML5Icon from './assets/skills/html5-logo.svg';
+import CSS3Icon from './assets/skills/css3-logo.svg';
+import GitIcon from './assets/skills/git-logo.svg';
+import DockerIcon from './assets/skills/docker-logo.svg';
+import TypeScriptIcon from './assets/skills/typescript-logo.svg';
+import PHPIcon from './assets/skills/php-logo.svg';
+import CIcon from './assets/skills/c-logo.svg';
+import CPlusPlusIcon from './assets/skills/c++-logo.svg';
+import CSharpIcon from './assets/skills/chash.svg';
+import SassIcon from './assets/skills/sass-logo.svg';
+import WebpackIcon from './assets/skills/webpack-logo.svg';
+import GraphQLIcon from './assets/skills/graphql-logo.svg';
+import FirebaseIcon from './assets/skills/firebase-logo.svg';
+import ExpressIcon from './assets/skills/express.js-logo.svg';
+import DjangoIcon from './assets/skills/django-logo.svg';
+import NextIcon from './assets/skills/next.js-logo.svg';
+import PostgreSQLIcon from './assets/skills/postgresql-logo.svg';
+
+const skillIcons = [
+  JavaScriptIcon,
+  ReactIcon,
+  AngularIcon,
+  VueIcon,
+  NodeIcon,
+  PythonIcon,
+  MongoDBIcon,
+  HTML5Icon,
+  CSS3Icon,
+  GitIcon,
+  DockerIcon,
+  TypeScriptIcon,
+  PHPIcon,
+  CIcon,
+  CPlusPlusIcon,
+  CSharpIcon,
+  SassIcon,
+  WebpackIcon,
+  GraphQLIcon,
+  FirebaseIcon,
+  ExpressIcon,
+  DjangoIcon,
+  NextIcon,
+  PostgreSQLIcon,
+];
 
 const HeroSection = () => {
   const controls = useAnimation();
@@ -33,13 +86,15 @@ const HeroSection = () => {
     tap: { scale: 0.9 },
   };
 
-  // Floating shape animation variants
-  const floatingVariants = {
+  // Floating skill icons animation variants
+  const floatingSkillVariants = {
     float: {
       y: [0, -20, 0],
+      x: [0, 20, 0],
+      scale: [1, 1.2, 1],
       rotate: [0, 10, -10, 0],
       transition: {
-        duration: 4,
+        duration: Math.random() * 4 + 2, // Random duration between 2 and 6 seconds
         repeat: Infinity,
         ease: 'easeInOut',
       },
@@ -81,35 +136,33 @@ const HeroSection = () => {
         }}
       />
 
-      {/* Floating Shapes */}
-      <motion.div
-        variants={floatingVariants}
-        animate="float"
-        style={{
-          position: 'absolute',
-          top: '20%',
-          left: '10%',
-          width: '80px',
-          height: '80px',
-          background: 'rgba(255, 255, 255, 0.1)',
-          borderRadius: '50%',
-          zIndex: 1,
-        }}
-      />
-      <motion.div
-        variants={floatingVariants}
-        animate="float"
-        style={{
-          position: 'absolute',
-          bottom: '20%',
-          right: '10%',
-          width: '120px',
-          height: '120px',
-          background: 'rgba(255, 255, 255, 0.1)',
-          borderRadius: '50%',
-          zIndex: 1,
-        }}
-      />
+      {/* Floating Skill Icons */}
+      {skillIcons.map((icon, index) => (
+        <motion.div
+          key={index}
+          variants={floatingSkillVariants}
+          animate="float"
+          style={{
+            position: 'absolute',
+            top: `${Math.random() * 100}%`, // Random vertical position
+            left: `${Math.random() * 100}%`, // Random horizontal position
+            width: '50px',
+            height: '50px',
+            zIndex: 1,
+          }}
+        >
+          <Box
+            component="img"
+            src={icon}
+            alt="Skill Icon"
+            sx={{
+              width: '100%',
+              height: '100%',
+              opacity: 0.7, // Semi-transparent
+            }}
+          />
+        </motion.div>
+      ))}
 
       {/* Left Side: Photo */}
       <AnimatePresence>
@@ -134,7 +187,7 @@ const HeroSection = () => {
               alt="My Photo"
               sx={{
                 width: { xs: '200px', md: '300px' },
-                height: { xs: '200px', md: '300px' },
+                height: { xs: '210px', md: '310px' },
                 borderRadius: '50%',
                 border: '4px solid white',
                 boxShadow: '0 4px 20px rgba(0, 0, 0, 0.3)',

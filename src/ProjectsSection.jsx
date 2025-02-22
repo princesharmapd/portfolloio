@@ -1,100 +1,95 @@
-// src/components/ProjectsSection.jsx
-import { Box, Typography, Grid, Card, CardContent, CardMedia, Button, Chip } from '@mui/material';
+import { Box, Typography, Grid, Card, CardContent, CardMedia, Chip } from '@mui/material';
 import { motion, useAnimation } from 'framer-motion';
 import { useEffect } from 'react';
 import { useInView } from 'react-intersection-observer';
+
+// Import images
+import pro1 from './assets/projects/pro1.png';
+import pro2 from './assets/projects/pro2.png';
+import pro3 from './assets/projects/pro3.gif';
+import pro4 from './assets/projects/pro4.png';
+import pro5 from './assets/projects/pro5.png';
+import pro6 from './assets/projects/pro6.jpg';
+import pro7 from './assets/projects/pro7.png';
+import pro8 from './assets/projects/pro8.png';
 
 const projects = [
   {
     id: 1,
     title: 'Project 1',
     description: 'A cool project showcasing modern web development techniques.',
-    image: 'https://via.placeholder.com/300',
-    link: 'https://example.com',
+    image: pro1,
     tags: ['React', 'Node.js', 'MongoDB'],
   },
   {
     id: 2,
     title: 'Project 2',
     description: 'Another cool project with a focus on responsive design.',
-    image: 'https://via.placeholder.com/300',
-    link: 'https://example.com',
+    image: pro2,
     tags: ['JavaScript', 'CSS', 'Firebase'],
   },
   {
     id: 3,
     title: 'Project 3',
     description: 'Yet another cool project highlighting backend development.',
-    image: 'https://via.placeholder.com/300',
-    link: 'https://example.com',
+    image: pro3,
     tags: ['Python', 'Django', 'PostgreSQL'],
   },
   {
     id: 4,
     title: 'Project 4',
     description: 'A project focusing on AI and machine learning integration.',
-    image: 'https://via.placeholder.com/300',
-    link: 'https://example.com',
+    image: pro4,
     tags: ['Python', 'TensorFlow', 'Keras'],
   },
   {
     id: 5,
     title: 'Project 5',
     description: 'A mobile app built with React Native for cross-platform development.',
-    image: 'https://via.placeholder.com/300',
-    link: 'https://example.com',
+    image: pro5,
     tags: ['React Native', 'Expo', 'Firebase'],
   },
   {
     id: 6,
     title: 'Project 6',
     description: 'A full-stack e-commerce platform with payment integration.',
-    image: 'https://via.placeholder.com/300',
-    link: 'https://example.com',
+    image: pro6,
     tags: ['React', 'Node.js', 'Stripe'],
   },
   {
     id: 7,
     title: 'Project 7',
     description: 'A real-time chat application using WebSockets.',
-    image: 'https://via.placeholder.com/300',
-    link: 'https://example.com',
+    image: pro7,
     tags: ['Socket.io', 'React', 'Node.js'],
   },
   {
     id: 8,
     title: 'Project 8',
     description: 'A data visualization dashboard for analytics.',
-    image: 'https://via.placeholder.com/300',
-    link: 'https://example.com',
+    image: pro8,
     tags: ['D3.js', 'React', 'Express'],
   },
 ];
 
 const ProjectsSection = () => {
   const controls = useAnimation();
-  const [ref, inView] = useInView({ triggerOnce: false }); // Reset animations when in view again
+  const [ref, inView] = useInView({ triggerOnce: false });
 
   useEffect(() => {
     if (inView) {
       controls.start('visible');
     } else {
-      controls.start('hidden'); // Reset to hidden state when out of view
+      controls.start('hidden');
     }
   }, [controls, inView]);
 
-  // Card animation variants
   const cardVariants = {
-    hidden: (index) => ({
-      opacity: 0,
-      x: index % 4 === 0 ? -50 : index % 4 === 1 ? 50 : 0, // Left, Right, or No X movement
-      y: index < 4 ? -50 : 50, // Top or Bottom movement
-    }),
+    hidden: { opacity: 0, scale: 0.5 },
     visible: {
       opacity: 1,
-      x: 0,
-      y: 0,
-      transition: { duration: 0.8, ease: 'easeOut' },
+      scale: 1,
+      transition: { duration: 0.5, ease: 'easeOut' },
     },
   };
 
@@ -104,44 +99,42 @@ const ProjectsSection = () => {
       ref={ref}
       sx={{
         py: 8,
-        bgcolor: 'background.paper', // White background
+        bgcolor: 'background.paper',
         position: 'relative',
         overflow: 'hidden',
-        px: { xs: 2, sm: 4, md: 6 }, // Add space on the left and right
+        px: { xs: 2, sm: 4, md: 6 },
       }}
     >
-      {/* Main Content */}
       <Typography variant="h2" align="center" gutterBottom>
         Projects
       </Typography>
       <Grid container spacing={4} justifyContent="center" sx={{ position: 'relative', zIndex: 1 }}>
         {projects.map((project, index) => (
-          <Grid item key={project.id} xs={12} sm={6} md={3}> {/* 4 columns on medium screens and up */}
+          <Grid item key={project.id} xs={12} sm={6} md={3}>
             <motion.div
               initial="hidden"
               animate={controls}
               variants={cardVariants}
-              custom={index} // Pass index to determine animation direction
-              transition={{ duration: 0.8, delay: index * 0.2 }}
+              transition={{ duration: 0.5, delay: index * 0.1 }}
               whileHover={{ scale: 1.05 }}
             >
               <Card
                 sx={{
-                  height: '300px', // Smaller height
-                  width: '100%', // Full width of the grid item
+                  height: '300px',
+                  width: '100%',
                   display: 'flex',
                   flexDirection: 'column',
                   justifyContent: 'space-between',
-                  borderRadius: '12px', // Rounded corners
-                  boxShadow: '0 4px 20px rgba(0, 0, 0, 0.1)', // Subtle shadow
+                  borderRadius: '12px',
+                  boxShadow: '0 4px 20px rgba(0, 0, 0, 0.1)',
                 }}
               >
                 <CardMedia
                   component="img"
-                  height="140" // Smaller image height
+                  height="140"
                   image={project.image}
                   alt={project.title}
-                  sx={{ objectFit: 'cover' }} // Ensure images are the same size
+                  sx={{ objectFit: 'cover' }}
                 />
                 <CardContent sx={{ flexGrow: 1 }}>
                   <Typography variant="h6" gutterBottom>
@@ -160,17 +153,6 @@ const ProjectsSection = () => {
                     ))}
                   </Box>
                 </CardContent>
-                <Button
-                  href={project.link}
-                  target="_blank"
-                  rel="noopener"
-                  variant="contained"
-                  color="secondary"
-                  fullWidth
-                  sx={{ mt: 'auto', borderRadius: '0 0 12px 12px' }} // Rounded bottom corners
-                >
-                  Learn More
-                </Button>
               </Card>
             </motion.div>
           </Grid>

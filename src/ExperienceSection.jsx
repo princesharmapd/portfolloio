@@ -7,24 +7,24 @@ import { useInView } from "react-intersection-observer";
 const corporateExperiences = [
   {
     id: 1,
-    title: "Full Stack Developer",
-    company: "Tech Solutions Inc.",
-    duration: "Jan 2021 - Present",
+    title: "Full Stack Web Developer",
+    company: "Aligned Automation services pvt. ltd.",
+    duration: "March 2023 - Present",
     description: [
-      "Developed and maintained scalable web applications using React, Node.js, and MongoDB.",
-      "Collaborated with cross-functional teams to deliver high-quality software solutions.",
-      "Implemented RESTful APIs and integrated third-party services.",
+      "Built scalable web apps using React, Node.js, and MongoDB.",
+      "Designed RESTful APIs and integrated third-party services.",
+      "Collaborated with cross-functional teams to deliver high-quality solutions.",
     ],
   },
   {
     id: 2,
-    title: "Frontend Developer",
-    company: "Web Innovators",
-    duration: "Jun 2019 - Dec 2020",
+    title: "Technical support Engineer",
+    company: "Aligned Automation services pvt. ltd.",
+    duration: "June 2021 - Feburary 2023",
     description: [
-      "Built responsive and user-friendly interfaces using React and Material-UI.",
-      "Optimized web applications for performance and accessibility.",
-      "Worked closely with designers to implement UI/UX best practices.",
+      "Developed responsive UIs using React and Material-UI.",
+      "Optimized web apps for performance and accessibility.",
+      "Worked with designers to implement UI/UX best practices.",
     ],
   },
 ];
@@ -32,42 +32,71 @@ const corporateExperiences = [
 const academicExperiences = [
   {
     id: 1,
-    institution: "University of Tech",
-    degree: "Bachelor of Science in Computer Science",
-    duration: "2016 - 2020",
+    institution: "Assam Down Town University",
+    degree: "Bachelor of Cloud Technology and Information Security",
+    duration: "2019 - 2024",
     description: [
-      "Graduated with honors, specializing in software development and algorithms.",
-      "Completed coursework in Data Structures, Algorithms, and Web Development.",
+      "Specialized in cloud computing, cybersecurity, and secure software development.",
+      "Hands-on experience with AWS, Azure, and Google Cloud.",
+      "Proficient in Python, Java, and C++ for scalable applications.",
     ],
   },
   {
     id: 2,
-    institution: "Green Valley High School",
-    degree: "High School Diploma",
+    institution: "Rajagopal Polytechnic College",
+    degree: "Electronics and Communication Engineering",
+    duration: "2015 - 2018",
+    description: [
+      "Expertise in electronics, embedded systems, and signal processing.",
+      "Developed IoT and robotics projects using C and Python.",
+      "Achieved top grades in Mathematics and Computer Science.",
+    ],
+  },
+  {
+    id: 3,
+    institution: "Model Higher Secondary School Kohima",
+    degree: "11th and 12th Science",
+    duration: "2012 - 2014",
+    description: [
+      "Focused on Physics, Chemistry, Mathematics, and Computer Science.",
+      "Participated in coding competitions and science fairs.",
+      "Developed strong analytical and problem-solving skills.",
+    ],
+  },
+  {
+    id: 4,
+    institution: "Chandmari Higher Secondary School Kohima",
+    degree: "1st to 10th Standard",
     duration: "2012 - 2016",
     description: [
-      "Achieved top grades in Mathematics and Computer Science.",
+      "Strong academic foundation in Mathematics and Computer Science.",
       "Participated in coding competitions and science fairs.",
+      "Developed teamwork and time management skills.",
     ],
   },
 ];
 
 const ExperienceSection = () => {
   const controls = useAnimation();
-  const [ref, inView] = useInView({ triggerOnce: false }); // Reset animations when in view again
+  const [ref, inView] = useInView({ triggerOnce: false });
 
   useEffect(() => {
     if (inView) {
       controls.start("visible");
     } else {
-      controls.start("hidden"); // Reset to hidden state when out of view
+      controls.start("hidden");
     }
   }, [controls, inView]);
 
-  // Text animation variants
-  const textVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: { opacity: 1, y: 0 },
+  // Variants for sliding animations
+  const slideFromLeft = {
+    hidden: { opacity: 0, x: -100 },
+    visible: { opacity: 1, x: 0 },
+  };
+
+  const slideFromRight = {
+    hidden: { opacity: 0, x: 100 },
+    visible: { opacity: 1, x: 0 },
   };
 
   return (
@@ -92,7 +121,7 @@ const ExperienceSection = () => {
       <motion.div
         initial={{ opacity: 0, scale: 0.8 }}
         animate={{ opacity: 1, scale: 1 }}
-        transition={{ duration: 1, delay: 0.5 }}
+        transition={{ duration: 2, delay: 0.5 }}
         style={{
           position: "absolute",
           top: "10%",
@@ -108,7 +137,7 @@ const ExperienceSection = () => {
       <motion.div
         initial={{ opacity: 0, scale: 0.8 }}
         animate={{ opacity: 1, scale: 1 }}
-        transition={{ duration: 1, delay: 0.7 }}
+        transition={{ duration: 2, delay: 0.7 }}
         style={{
           position: "absolute",
           bottom: "10%",
@@ -128,8 +157,8 @@ const ExperienceSection = () => {
         <motion.div
           initial="hidden"
           animate={controls}
-          variants={textVariants}
-          transition={{ duration: 0.8, delay: 0.2 }}
+          variants={slideFromLeft} // Slide from left
+          transition={{ duration: 1.5, delay: 0.2 }}
         >
           <Typography variant="h4" color="primary" gutterBottom>
             Experience
@@ -143,8 +172,8 @@ const ExperienceSection = () => {
             <motion.div
               initial="hidden"
               animate={controls}
-              variants={textVariants}
-              transition={{ duration: 0.8, delay: 0.4 }}
+              variants={slideFromLeft} // Slide from left
+              transition={{ duration: 1.5, delay: 0.4 }}
             >
               <Typography variant="h5" color="primary" gutterBottom>
                 Corporate Experience
@@ -170,8 +199,8 @@ const ExperienceSection = () => {
                     component={motion.ul}
                     initial="hidden"
                     animate={controls}
-                    variants={textVariants}
-                    transition={{ duration: 0.8, delay: 0.6 + index * 0.2 }}
+                    variants={slideFromLeft} // Slide from left
+                    transition={{ duration: 1.5, delay: 0.6 + index * 0.3 }}
                     sx={{ listStyleType: "none", paddingLeft: 0 }}
                   >
                     {experience.description.map((item, i) => (
@@ -179,9 +208,19 @@ const ExperienceSection = () => {
                         key={i}
                         initial={{ opacity: 0, x: -20 }}
                         animate={{ opacity: 1, x: 0 }}
-                        transition={{ duration: 0.5, delay: 0.8 + i * 0.2 }}
-                        style={{ marginBottom: "8px" }}
+                        transition={{ duration: 1, delay: 0.8 + i * 0.3 }}
+                        style={{ marginBottom: "8px", display: "flex", alignItems: "center" }}
                       >
+                        <Box
+                          component="span"
+                          sx={{
+                            width: "6px",
+                            height: "6px",
+                            bgcolor: "primary.main",
+                            borderRadius: "50%",
+                            mr: 1,
+                          }}
+                        />
                         {item}
                       </motion.li>
                     ))}
@@ -196,8 +235,8 @@ const ExperienceSection = () => {
             <motion.div
               initial="hidden"
               animate={controls}
-              variants={textVariants}
-              transition={{ duration: 0.8, delay: 0.6 }}
+              variants={slideFromRight} // Slide from right
+              transition={{ duration: 1.5, delay: 0.6 }}
             >
               <Typography variant="h5" color="primary" gutterBottom>
                 Academic Background
@@ -223,18 +262,28 @@ const ExperienceSection = () => {
                     component={motion.ul}
                     initial="hidden"
                     animate={controls}
-                    variants={textVariants}
-                    transition={{ duration: 0.8, delay: 0.8 + index * 0.2 }}
+                    variants={slideFromRight} // Slide from right
+                    transition={{ duration: 1.5, delay: 0.8 + index * 0.3 }}
                     sx={{ listStyleType: "none", paddingLeft: 0 }}
                   >
                     {experience.description.map((item, i) => (
                       <motion.li
                         key={i}
-                        initial={{ opacity: 0, x: -20 }}
+                        initial={{ opacity: 0, x: 20 }}
                         animate={{ opacity: 1, x: 0 }}
-                        transition={{ duration: 0.5, delay: 1 + i * 0.2 }}
-                        style={{ marginBottom: "8px" }}
+                        transition={{ duration: 1, delay: 1 + i * 0.3 }}
+                        style={{ marginBottom: "8px", display: "flex", alignItems: "center" }}
                       >
+                        <Box
+                          component="span"
+                          sx={{
+                            width: "6px",
+                            height: "6px",
+                            bgcolor: "primary.main",
+                            borderRadius: "50%",
+                            mr: 1,
+                          }}
+                        />
                         {item}
                       </motion.li>
                     ))}

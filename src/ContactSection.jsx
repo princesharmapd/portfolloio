@@ -119,19 +119,19 @@ const ContactSection = () => {
                 <Box sx={{ display: 'flex', alignItems: 'center', gap: 2, mb: 2 }}>
                   <LocationOn color="primary" />
                   <Typography variant="body1" color="textSecondary">
-                    New Delhi, India
+                    Pune Maharastra, India
                   </Typography>
                 </Box>
                 <Box sx={{ display: 'flex', alignItems: 'center', gap: 2, mb: 2 }}>
                   <Email color="primary" />
                   <Typography variant="body1" color="textSecondary">
-                    prince.sharma@example.com
+                    Princesharma1153@outlook.com
                   </Typography>
                 </Box>
                 <Box sx={{ display: 'flex', alignItems: 'center', gap: 2, mb: 2 }}>
                   <Phone color="primary" />
                   <Typography variant="body1" color="textSecondary">
-                    +91 98765 43210
+                    +91 9774642917
                   </Typography>
                 </Box>
               </Box>

@@ -11,19 +11,24 @@ const Navbar = ({ toggleTheme, isDarkMode }) => {
     return (
         <AppBar position="sticky" color="default">
             <Toolbar>
+                {/* Left: My Portfolio */}
                 <motion.div
                     initial={{ opacity: 0, x: -50 }}
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ duration: 0.5 }}
+                    style={{ flexGrow: 1 }} // Takes up remaining space on the left
                 >
-                    <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+                    <Typography variant="h6" component="div">
                         My Portfolio
                     </Typography>
                 </motion.div>
+
+                {/* Center: Navigation Buttons */}
                 <motion.div
                     initial={{ opacity: 0, x: 50 }}
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ duration: 0.5 }}
+                    style={{ display: 'flex', justifyContent: 'center', flexGrow: 2 }} // Centers the buttons
                 >
                     <ScrollLink to="home" smooth={true} duration={500}>
                         <Button color="inherit">Home</Button>
@@ -34,16 +39,24 @@ const Navbar = ({ toggleTheme, isDarkMode }) => {
                     <ScrollLink to="experience" smooth={true} duration={500} spy={true} offset={-70}>
                         <Button color="inherit">Experience</Button>
                     </ScrollLink>
-                    <ScrollLink to="skill" smooth={true} duration={500} spy={true} offset={-70}>
+                    <ScrollLink to="skills" smooth={true} duration={500} spy={true} offset={-70}>
                         <Button color="inherit">Skills</Button>
                     </ScrollLink>
-
                     <ScrollLink to="projects" smooth={true} duration={500}>
                         <Button color="inherit">Projects</Button>
                     </ScrollLink>
                     <ScrollLink to="contact" smooth={true} duration={500}>
                         <Button color="inherit">Contact</Button>
                     </ScrollLink>
+                </motion.div>
+
+                {/* Right: Theme Toggle Button */}
+                <motion.div
+                    initial={{ opacity: 0, x: 50 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ duration: 0.5 }}
+                    style={{ flexGrow: 1, display: 'flex', justifyContent: 'flex-end' }} // Aligns to the right
+                >
                     <IconButton onClick={toggleTheme} color="inherit">
                         {isDarkMode ? <Brightness7Icon /> : <Brightness4Icon />}
                     </IconButton>
